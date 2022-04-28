@@ -11,7 +11,7 @@ public class Main {
 
 	static void menu() {
 		System.out.println("1.Nhap thong tin cong ty");
-//		System.out.println("2.Phan bo nhan vien vao truong phong");
+		System.out.println("2.Phan bo nhan vien vao truong phong");
 		System.out.println("3.Them thong tin 1 nhan su");
 //		System.out.println("4.Xoa thong tin 1 nhan su");
 		System.out.println("5.Xuat toan bo nhan su");
@@ -53,8 +53,13 @@ public class Main {
 			case 1:
 				service.nhapCongTy(scanner);
 				break;
-//			case 2:
-//				break;
+			case 2:
+				System.out.println("Ma so cua nhan vien: ");
+				String maSoCuaNhanVien = scanner.nextLine();
+				System.out.println("Ma so cua truong phong: ");
+				String maSoCuaTruongPhong = scanner.nextLine();
+				service.phanBoNhanVienVaoTruongPhong(maSoCuaNhanVien, maSoCuaTruongPhong);
+				break;
 			case 3:
 				them();
 				break;

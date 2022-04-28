@@ -37,6 +37,13 @@ public class Service {
 		congTy.setDoanhThuThang(Double.parseDouble(scanner.nextLine()));
 	}
 
+	public void phanBoNhanVienVaoTruongPhong(String maSoCuaNhanVien, String maSoCuaTruongPhong) {
+		NhanVien nhanVien = listNv.stream().filter(nv -> nv.getMaSo().equals(maSoCuaNhanVien)).findAny().get();
+		TruongPhong truongPhong = listTp.stream().filter(tp -> tp.getMaSo().equals(maSoCuaTruongPhong)).findAny().get();
+		nhanVien.setTruongPhongQuanLy(truongPhong);
+		truongPhong.getDsNhanVien().add(nhanVien);
+	}
+
 	public void themNhanSu(NhanSu nhanSu, Scanner scanner) {
 		System.out.print("Ma so: ");
 		nhanSu.setMaSo(scanner.nextLine());
