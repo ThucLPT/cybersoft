@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-import model.CongTy;
 import model.GiamDoc;
 import model.NhanSu;
 import model.NhanVien;
@@ -12,9 +11,9 @@ public class Main {
 
 	static void menu() {
 		System.out.println("1.Nhap thong tin cong ty");
-		System.out.println("2.Phan bo nhan vien vao truong phong");
+//		System.out.println("2.Phan bo nhan vien vao truong phong");
 		System.out.println("3.Them thong tin 1 nhan su");
-		System.out.println("4.Xoa thong tin 1 nhan su");
+//		System.out.println("4.Xoa thong tin 1 nhan su");
 		System.out.println("5.Xuat toan bo nhan su");
 		System.out.println("6.Xuat tong luong toan cong ty");
 		System.out.println("7.Tim nhan vien co luong cao nhat");
@@ -52,38 +51,38 @@ public class Main {
 			int choice = Integer.parseInt(scanner.nextLine());
 			switch (choice) {
 			case 1:
-				CongTy congTy = new CongTy();
-				service.nhapCongTy(congTy, scanner);
+				service.nhapCongTy(scanner);
 				break;
-			case 2:
-				break;
+//			case 2:
+//				break;
 			case 3:
 				them();
 				break;
-			case 4:
-				break;
+//			case 4:
+//				break;
 			case 5:
-				service.xuatDanhSach(service.getListNs());
+				service.xuatDanhSachNhanSu(service.getListNs());
 				break;
 			case 6:
 				System.out.println(service.tinhTongLuong());
 				break;
 			case 7:
-				service.xuatNhanSu(service.findNhanVienByLuongMax());
+				service.xuatNhanSuVoiLuong(service.findNhanVienByLuongMax());
 				break;
 			case 8:
-				service.xuatNhanSu(service.findTruongPhongBySoNhanVienMax());
+				service.xuatTruongPhong(service.findTruongPhongBySoNhanVienMax());
 				break;
 			case 9:
-				service.xuatDanhSach(service.sortNhanSuByNameAsc());
+				service.xuatDanhSachNhanSu(service.sortNhanSuByNameAsc());
 				break;
 			case 10:
-				service.xuatDanhSach(service.sortNhanSuByLuongDesc());
+				service.xuatDanhSachNhanSuVoiLuong(service.sortNhanSuByLuongDesc());
 				break;
 			case 11:
-				service.xuatNhanSu(service.findGiamDocByCoPhanMax());
+				service.xuatGiamDoc(service.findGiamDocByCoPhanMax());
 				break;
 			case 12:
+				service.xuatDanhSachGiamDocVoiThuNhap();
 				break;
 			case 13:
 				return;

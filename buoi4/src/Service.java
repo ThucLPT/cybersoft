@@ -10,12 +10,14 @@ import model.NhanVien;
 import model.TruongPhong;
 
 public class Service {
+	private CongTy congTy;
 	private List<NhanSu> listNs;
 	private List<NhanVien> listNv;
 	private List<TruongPhong> listTp;
 	private List<GiamDoc> listGd;
 
 	public Service() {
+		congTy = new CongTy();
 		listNs = new ArrayList<>();
 		listNv = new ArrayList<>();
 		listTp = new ArrayList<>();
@@ -26,7 +28,7 @@ public class Service {
 		return listNs;
 	}
 
-	public void nhapCongTy(CongTy congTy, Scanner scanner) {
+	public void nhapCongTy(Scanner scanner) {
 		System.out.print("Ten: ");
 		congTy.setTen(scanner.nextLine());
 		System.out.print("Ma so thue: ");
@@ -56,15 +58,11 @@ public class Service {
 		listNs.add(nhanSu);
 	}
 
-	public void xuatNhanSu(NhanSu nhanSu) {
-		System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\n", nhanSu.getMaSo(), nhanSu.getTen(), nhanSu.getSdt(),
-				nhanSu.getSoNgayLam(), tinhLuong(nhanSu));
-	}
-
-	public void xuatDanhSach(List<NhanSu> listNs) {
-		System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "Ma so", "Ho ten", "Sdt", "So ngay lam", "Luong");
+	public void xuatDanhSachNhanSu(List<NhanSu> listNs) {
+		System.out.printf("%s\t\t%s\t\t%s\t\t%s\n", "Ma so", "Ho ten", "Sdt", "So ngay lam");
 		for (NhanSu nhanSu : listNs)
-			xuatNhanSu(nhanSu);
+			System.out.printf("%s\t\t%s\t\t%s\t\t%s\n", nhanSu.getMaSo(), nhanSu.getTen(), nhanSu.getSdt(),
+					nhanSu.getSoNgayLam());
 	}
 
 	private int tinhLuong(NhanSu nhanSu) {
@@ -88,11 +86,29 @@ public class Service {
 		return listNv.get(0);
 	}
 
+	public void xuatNhanSuVoiLuong(NhanSu nhanSu) {
+		System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "Ma so", "Ho ten", "Sdt", "So ngay lam", "Luong");
+		System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\n", nhanSu.getMaSo(), nhanSu.getTen(), nhanSu.getSdt(),
+				nhanSu.getSoNgayLam(), tinhLuong(nhanSu));
+	}
+
+	public void xuatDanhSachNhanSuVoiLuong(List<NhanSu> list) {
+		System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "Ma so", "Ho ten", "Sdt", "So ngay lam", "Luong");
+		for (NhanSu nhanSu : list)
+			xuatNhanSuVoiLuong(nhanSu);
+	}
+
 	public TruongPhong findTruongPhongBySoNhanVienMax() {
 		Comparator<TruongPhong> comparator = (TruongPhong tp1, TruongPhong tp2) -> Integer
 				.compare(tp1.getDsNhanVien().size(), tp2.getDsNhanVien().size());
 		listTp.sort(comparator.reversed());
 		return listTp.get(0);
+	}
+
+	public void xuatTruongPhong(TruongPhong truongPhong) {
+		System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "Ma so", "Ho ten", "Sdt", "So ngay lam", "So nhan vien");
+		System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\n", truongPhong.getMaSo(), truongPhong.getTen(),
+				truongPhong.getSdt(), truongPhong.getSoNgayLam(), truongPhong.getDsNhanVien().size());
 	}
 
 	public List<NhanSu> sortNhanSuByNameAsc() {
@@ -115,5 +131,22 @@ public class Service {
 		Comparator<GiamDoc> comparator = Comparator.comparing(GiamDoc::getCoPhan);
 		listGd.sort(comparator.reversed());
 		return listGd.get(0);
+	}
+
+	public void xuatGiamDoc(GiamDoc giamDoc) {
+		System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "Ma so", "Ho ten", "Sdt", "So ngay lam", "So co phan");
+		System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\n", giamDoc.getMaSo(), giamDoc.getTen(), giamDoc.getSdt(),
+				giamDoc.getSoNgayLam(), giamDoc.getCoPhan());
+	}
+
+	private double tinhThuNhap(GiamDoc giamDoc) {
+		return tinhLuong(giamDoc) + giamDoc.getCoPhan() * (congTy.getDoanhThuThang() - tinhTongLuong());
+	}
+
+	public void xuatDanhSachGiamDocVoiThuNhap() {
+		System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\n", "Ma so", "Ho ten", "Sdt", "So ngay lam", "Thu nhap");
+		for (GiamDoc gd : listGd)
+			System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\n", gd.getMaSo(), gd.getTen(), gd.getSdt(), gd.getSoNgayLam(),
+					tinhThuNhap(gd));
 	}
 }
