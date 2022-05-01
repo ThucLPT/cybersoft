@@ -65,6 +65,22 @@ public class Service {
 		listNs.add(nhanSu);
 	}
 
+	public void xoaNhanSu(String maSo) {
+		NhanSu nhanSu = listNs.stream().filter(ns -> ns.getMaSo().equals(maSo)).findAny().get();
+		if (nhanSu instanceof NhanVien) {
+			((NhanVien) nhanSu).getTruongPhongQuanLy().getDsNhanVien().remove(nhanSu);
+			listNv.remove(nhanSu);
+		}
+		if (nhanSu instanceof TruongPhong) {
+			for (NhanVien nhanVien : ((TruongPhong) nhanSu).getDsNhanVien())
+				nhanVien.setTruongPhongQuanLy(null);
+			listTp.remove(nhanSu);
+		}
+		if (nhanSu instanceof GiamDoc)
+			listGd.remove(nhanSu);
+		listNs.remove(nhanSu);
+	}
+
 	public void xuatDanhSachNhanSu(List<NhanSu> listNs) {
 		System.out.printf("%s\t\t%s\t\t%s\t\t%s\n", "Ma so", "Ho ten", "Sdt", "So ngay lam");
 		for (NhanSu nhanSu : listNs)

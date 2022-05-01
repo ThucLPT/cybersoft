@@ -13,7 +13,7 @@ public class Main {
 		System.out.println("1.Nhap thong tin cong ty");
 		System.out.println("2.Phan bo nhan vien vao truong phong");
 		System.out.println("3.Them thong tin 1 nhan su");
-//		System.out.println("4.Xoa thong tin 1 nhan su");
+		System.out.println("4.Xoa thong tin 1 nhan su");
 		System.out.println("5.Xuat toan bo nhan su");
 		System.out.println("6.Xuat tong luong toan cong ty");
 		System.out.println("7.Tim nhan vien co luong cao nhat");
@@ -54,17 +54,20 @@ public class Main {
 				service.nhapCongTy(scanner);
 				break;
 			case 2:
-				System.out.println("Ma so cua nhan vien: ");
+				System.out.print("Ma so cua nhan vien: ");
 				String maSoCuaNhanVien = scanner.nextLine();
-				System.out.println("Ma so cua truong phong: ");
+				System.out.print("Ma so cua truong phong: ");
 				String maSoCuaTruongPhong = scanner.nextLine();
 				service.phanBoNhanVienVaoTruongPhong(maSoCuaNhanVien, maSoCuaTruongPhong);
 				break;
 			case 3:
 				them();
 				break;
-//			case 4:
-//				break;
+			case 4:
+				System.out.print("Nhap ma so cua nhan su can xoa: ");
+				String maSo = scanner.nextLine();
+				service.xoaNhanSu(maSo);
+				break;
 			case 5:
 				service.xuatDanhSachNhanSu(service.getListNs());
 				break;
