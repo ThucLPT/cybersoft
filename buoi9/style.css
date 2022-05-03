@@ -1,0 +1,18 @@
+#banner-img {
+    background-image: url('img-layout-2/nature.jpg');
+    background-size: cover;
+    padding: 1% 1% 1% 20%;
+}
+
+#banner-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    color: white;
+    background-color: rgba(150, 0, 0, 0.5);
+    border-radius: 50%;
+    text-align: center;
+}
